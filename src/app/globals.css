@@ -1,26 +1,269 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   ELBRIT LIFE SCIENCES — "The Monograph"
+   Editorial pharmaceutical identity · Spectral / Inter / IBM Plex Mono
+   Cool clinical palette · hairlines · restraint
+   ============================================================ */
+
+@theme {
+  /* Brand navy scale (brand = navy-800 #16235C) */
+  --color-navy-50: #eef1f8;
+  --color-navy-100: #dbe1ee;
+  --color-navy-200: #b7c3dd;
+  --color-navy-300: #8b9dc4;
+  --color-navy-400: #5a72a4;
+  --color-navy-500: #2f4a86;
+  --color-navy-600: #213a72;
+  --color-navy-700: #1a2c5b;
+  --color-navy-800: #16235c;
+  --color-navy-900: #101a44;
+  --color-navy-950: #0b1230;
+
+  /* Elbrit red — used as a seal / marker only */
+  --color-elbrit-50: #fceceb;
+  --color-elbrit-100: #f8d2d0;
+  --color-elbrit-400: #e8433f;
+  --color-elbrit-500: #e11b22;
+  --color-elbrit-600: #c11319;
+  --color-elbrit-700: #9c0f14;
+
+  /* Neutrals — cool, clinical (not warm cream) */
+  --color-ink: #0e1630;
+  --color-paper: #f3f6fb;
+  --color-mist: #f3f6fb;
+  --color-hairline: #dbe1ec;
+  --color-muted: #55617a;
+  --color-slate-soft: #55617a;
+  --color-cyan-500: #2f4a86;
+  --color-sky-soft: #eaf1fb;
+
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Restrained elevation */
+  --shadow-soft: 0 1px 2px rgba(14, 22, 48, 0.05);
+  --shadow-card: 0 1px 3px rgba(14, 22, 48, 0.05), 0 12px 30px rgba(14, 22, 48, 0.06);
+  --shadow-float: 0 24px 60px rgba(14, 22, 48, 0.12);
+
+  --animate-drift: drift 14s ease-in-out infinite;
+  --animate-marquee: marquee 48s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: var(--color-ink);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-navy-800);
+    color: #fff;
+  }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.06;
+    color: var(--color-ink);
+  }
+  h3, h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-navy-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar { width: 11px; }
+  ::-webkit-scrollbar-track { background: var(--color-paper); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-navy-200);
+    border-radius: 0;
+    border: 3px solid var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-navy-300); }
+
+  .skip-link {
+    position: fixed; left: 1rem; top: -100px; z-index: 100;
+    background: var(--color-ink); color: #fff;
+    padding: 0.7rem 1.1rem; font-weight: 600; font-size: 0.85rem;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 104rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) { .container-x { padding-inline: 3rem; } }
+  @media (min-width: 1280px) { .container-x { padding-inline: 4.5rem; } }
+  @media (min-width: 1600px) { .container-x { padding-inline: 6rem; } }
+
+  /* Constrain long-form reading text even inside a wide container */
+  .measure { max-width: 42rem; }
+
+  /* Monograph eyebrow — mono, tracked, with a red index tick */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 8px; height: 8px;
+    background: var(--color-elbrit-500);
+    display: inline-block;
+  }
+
+  /* Mono data label */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* Hairline rule */
+  .rule { height: 1px; width: 100%; background: var(--color-hairline); border: 0; }
+
+  /* Editorial serif emphasis (italic) — replaces old text-gradient */
+  .text-gradient,
+  .accent {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-navy-700);
+  }
+
+  /* Cards — flat, hairline, editorial */
+  .card,
+  .card-3d {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--color-hairline);
+    border-radius: 3px;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .card:hover,
+  .card-3d:hover {
+    border-color: var(--color-navy-300);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Flat surface (legacy .glass usages) */
+  .glass {
+    background: #fff;
+    border: 1px solid var(--color-hairline);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: none;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    border-radius: 4px;
+    padding: 0.8rem 1.4rem;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    cursor: pointer;
+  }
+  .btn-primary { color: #fff; background: var(--color-ink); }
+  .btn-primary:hover { background: var(--color-navy-800); }
+  .btn-accent { color: #fff; background: var(--color-elbrit-500); }
+  .btn-accent:hover { background: var(--color-elbrit-600); }
+  .btn-ghost { color: var(--color-ink); background: transparent; border: 1px solid var(--color-navy-300); }
+  .btn-ghost:hover { border-color: var(--color-ink); }
+
+  /* Underline text-link */
+  .link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-weight: 500; color: var(--color-ink);
+    border-bottom: 1px solid var(--color-navy-300);
+    padding-bottom: 2px;
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .link:hover { border-color: var(--color-elbrit-500); color: var(--color-elbrit-600); }
+
+  /* Deep navy surface */
+  .gradient-navy {
+    background-color: var(--color-navy-900);
+    background-image: linear-gradient(180deg, #16235c 0%, #101a44 60%, #0b1230 100%);
+  }
+
+  /* "Est." seal */
+  .seal {
+    display: grid; place-items: center;
+    width: 92px; height: 92px;
+    border: 1px solid var(--color-navy-300);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy-700);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Neutralised legacy decorations */
+  .orb { display: none !important; }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(14, 22, 48, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14, 22, 48, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
