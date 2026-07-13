@@ -155,7 +155,7 @@
   }
 
   /* Hairline rule */
-  .rule { height: 1px; width: 100%; background: var(--color-hairline); border: 0; }
+  .rule { height: 1.1px; width: 100%; background: var(--color-hairline); border: 0; }
 
   /* Editorial serif emphasis (italic) — replaces old text-gradient */
   .text-gradient,
