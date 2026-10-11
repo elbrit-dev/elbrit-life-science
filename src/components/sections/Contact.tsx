@@ -3,10 +3,30 @@
 import { useState } from "react";
 import { MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
-import { OFFICES } from "@/lib/content";
+import Honeypot from "@/components/ui/Honeypot";
+import { COMPANY, OFFICES } from "@/lib/content";
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      if (res.ok) form.reset();
+      setStatus(res.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section className="container-x py-12">
@@ -43,48 +63,55 @@ export default function Contact() {
         {/* Form */}
         <Reveal delay={0.1}>
           <div className="rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]">
-            {sent ? (
+            {status === "sent" ? (
               <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                 <CheckCircle2 className="h-14 w-14 text-green-500" />
                 <h3 className="mt-4 text-xl font-semibold text-navy-900">Thank you!</h3>
                 <p className="mt-2 max-w-sm text-sm text-slate-soft">
                   Your message has been received. A member of our team will be in touch shortly.
                 </p>
-                <button onClick={() => setSent(false)} className="btn btn-ghost mt-6">
+                <button onClick={() => setStatus("idle")} className="btn btn-ghost mt-6">
                   Send another message
                 </button>
               </div>
             ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-                className="grid gap-4 sm:grid-cols-2"
-              >
+              <form onSubmit={onSubmit} className="relative grid gap-4 sm:grid-cols-2">
+                <Honeypot />
                 <Field label="First name" name="first" required />
                 <Field label="Last name" name="last" required />
                 <Field label="Company" name="company" className="sm:col-span-2" />
                 <Field label="Email" name="email" type="email" required />
                 <Field label="Mobile" name="mobile" type="tel" />
+                <Field label="Landline" name="landline" type="tel" className="sm:col-span-2" />
                 <div className="sm:col-span-2">
                   <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-navy-800">
-                    Message
+                    Message<span className="text-elbrit-500"> *</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={4}
+                    required
                     className="w-full resize-none rounded-xl border border-navy-100 bg-mist px-4 py-3 text-sm text-navy-900 outline-none transition-colors placeholder:text-slate-400 focus:border-navy-400 focus:bg-white focus:ring-2 focus:ring-navy-200"
                     placeholder="How can we help?"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary sm:col-span-2">
-                  Send message
+                {status === "error" && (
+                  <p role="alert" className="rounded-xl border border-elbrit-100 bg-elbrit-50 p-4 text-sm text-elbrit-700 sm:col-span-2">
+                    We couldn&apos;t send your message. Please try again, or call us toll-free on{" "}
+                    <a href={`tel:${COMPANY.tollFree.replace(/\s/g, "")}`} className="font-semibold underline">
+                      {COMPANY.tollFree}
+                    </a>
+                    .
+                  </p>
+                )}
+                <button type="submit" disabled={status === "sending"} className="btn btn-primary sm:col-span-2 disabled:opacity-60">
+                  {status === "sending" ? "Sending…" : "Send message"}
                   <Send className="h-4 w-4" />
                 </button>
                 <p className="text-xs text-slate-soft sm:col-span-2">
-                  For adverse-event reporting, please use our Pharmacovigilance channel.
+                  For adverse-event reporting, please use our{" "}
+                  <a href="/pharmacovigilance" className="link">Pharmacovigilance form</a>.
                 </p>
               </form>
             )}

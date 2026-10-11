@@ -1,9 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Search, Package, X } from "lucide-react";
 import Icon from "@/components/ui/Icon";
-import { buildCatalogue, TOTAL_SKUS, type Category } from "@/lib/products";
+import { buildCatalogue, familySlug, ERP_BY_CODE, TOTAL_SKUS, type Category } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 export default function ProductsExplorer() {
@@ -28,7 +29,11 @@ export default function ProductsExplorer() {
         (fam) =>
           !q ||
           fam.family.toLowerCase().includes(q) ||
-          fam.variants.some((v) => v.toLowerCase().includes(q))
+          fam.variants.some(
+            (v) =>
+              v.toLowerCase().includes(q) ||
+              ERP_BY_CODE.get(v)?.composition.some((c) => c.toLowerCase().includes(q))
+          )
       ),
     }))
     .filter((r) => r.families.length > 0);
@@ -50,7 +55,7 @@ export default function ProductsExplorer() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="search"
-              placeholder="Search 210 products…"
+              placeholder={`Search ${TOTAL_SKUS} products or molecules…`}
               className="w-full border-b border-ink bg-transparent py-3 pl-6 pr-6 text-base text-ink outline-none transition-colors placeholder:text-navy-300 focus:border-elbrit-500"
             />
             {query && (
@@ -145,7 +150,11 @@ export default function ProductsExplorer() {
 
                   <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                     {cat.families.map((fam) => (
-                      <article key={fam.family} className="card p-5">
+                      <Link
+                        key={fam.family}
+                        href={`/products/${familySlug(fam.family)}`}
+                        className="card block p-5 transition-colors hover:border-navy-300"
+                      >
                         <div className="flex items-center justify-between gap-2">
                           <h3 className="font-display text-lg text-ink">{fam.family}</h3>
                           <span className="mono shrink-0 text-[0.65rem] uppercase tracking-wider text-navy-300">
@@ -162,7 +171,7 @@ export default function ProductsExplorer() {
                             </span>
                           ))}
                         </div>
-                      </article>
+                      </Link>
                     ))}
                   </div>
                 </section>

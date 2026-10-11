@@ -68,7 +68,7 @@ export default function ResearchPage() {
       <CTABand
         title="Report an adverse event"
         body="Patient safety is everyone's responsibility. Reach our pharmacovigilance team to report any adverse event."
-        primary={{ label: "Contact pharmacovigilance", href: "/contact" }}
+        primary={{ label: "Report an adverse event", href: "/pharmacovigilance" }}
         secondary={{ label: "Clinical research", href: "/clinical-research" }}
       />
     </>

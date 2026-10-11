@@ -1,0 +1,27 @@
+# Firebase App Hosting config. App Hosting (not classic Hosting) is required: the contact and
+# pharmacovigilance forms post to Next.js route handlers (/api/*) that run on the server.
+#
+# One-time secret setup (the website-api@elbrit.org "key:secret" from ERPNext):
+#   firebase apphosting:secrets:set erp-website-token
+runConfig:
+  minInstances: 0
+
+env:
+  - variable: ERP_URL
+    value: https://erpnext.elbrit.org
+    availability: [RUNTIME]
+  - variable: ERP_CONTACT_FORM
+    value: gbbnmsvj9r
+    availability: [RUNTIME]
+  - variable: ERP_CONTACT_DOCTYPE
+    value: formspro_zmybju000001
+    availability: [RUNTIME]
+  - variable: ERP_AE_FORM
+    value: gbr3vi37ma
+    availability: [RUNTIME]
+  - variable: ERP_AE_DOCTYPE
+    value: formspro_9avfly000001
+    availability: [RUNTIME]
+  - variable: ERP_WEBSITE_TOKEN
+    secret: erp-website-token
+    availability: [RUNTIME]

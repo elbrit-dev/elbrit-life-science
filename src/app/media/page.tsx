@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Download, FileText, Image as ImageIcon, Database } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Download, FileText, Image as ImageIcon, Database } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABand from "@/components/ui/CTABand";
 import Reveal from "@/components/ui/Reveal";
@@ -13,9 +14,9 @@ export const metadata: Metadata = {
 };
 
 const KIT = [
-  { icon: FileText, label: "Corporate brochure" },
+  { icon: FileText, label: "Corporate brochure", href: "/media-kit/Elbrit-Corporate-Brochure.pdf" },
   { icon: ImageIcon, label: "Elbrit logo & product logos" },
-  { icon: Database, label: "Company key data" },
+  { icon: Database, label: "Company key data", href: "/media-kit/Key-Company-Data.pdf" },
 ];
 
 export default function MediaPage() {
@@ -33,14 +34,17 @@ export default function MediaPage() {
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {PRESS.map((n, i) => (
             <Reveal key={n.title} delay={i * 0.1}>
-              <article className="card-3d flex h-full flex-col p-7">
+              <Link href={`/media/${n.slug}`} className="card-3d group flex h-full flex-col p-7">
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-elbrit-50 px-3 py-1 text-xs font-semibold text-elbrit-600">{n.tag}</span>
                   <span className="text-xs text-slate-soft">{n.date}</span>
                 </div>
                 <h3 className="mt-5 text-lg font-semibold leading-snug text-navy-900">{n.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-soft">{n.body}</p>
-              </article>
+                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink group-hover:text-elbrit-600">
+                  Read more <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -62,13 +66,20 @@ export default function MediaPage() {
                       <span className="grid h-11 w-11 place-items-center rounded-xl bg-navy-50 text-navy-700">
                         <k.icon className="h-5 w-5" />
                       </span>
-                      <span className="text-sm font-medium text-navy-900">{k.label}</span>
+                      {k.href ? (
+                        <a href={k.href} className="text-sm font-medium text-navy-900 hover:text-elbrit-600" download>
+                          {k.label} <span className="text-xs text-slate-soft">(PDF)</span>
+                        </a>
+                      ) : (
+                        <span className="text-sm font-medium text-navy-900">{k.label}</span>
+                      )}
                     </li>
                   ))}
                 </ul>
-                <a href="/contact" className="btn btn-primary mt-7 w-full">
-                  Request the media kit <Download className="h-4 w-4" />
+                <a href="/media-kit/elbrit-media-kit-may2019.zip" className="btn btn-primary mt-7 w-full" download>
+                  Download the media kit <Download className="h-4 w-4" />
                 </a>
+                <p className="mt-3 text-center text-xs text-slate-soft">ZIP · 4 MB · brochure, logos & key data</p>
               </div>
             </Reveal>
           </div>

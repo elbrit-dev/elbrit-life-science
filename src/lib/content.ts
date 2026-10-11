@@ -40,6 +40,7 @@ export const NAV: NavItem[] = [
     children: [
       { label: "Research & Development", href: "/research", desc: "How we innovate" },
       { label: "Clinical Research", href: "/clinical-research", desc: "Evidence & safety" },
+      { label: "Pharmacovigilance", href: "/pharmacovigilance", desc: "Report an adverse event" },
     ],
   },
   {
@@ -166,18 +167,21 @@ export const CSR_PILLARS = [
 
 export const PRESS = [
   {
+    slug: "elbrit-life-sciences-to-setup-a-second-manufacturing-facility-in-east-sikkim",
     date: "Jul 2, 2019",
     title: "Elbrit to build a second manufacturing facility in Sikkim to expand capacity",
     body: "Elbrit Life Sciences announced a USD 2 million investment to set up its second manufacturing facility in Singtam, East Sikkim.",
     tag: "Expansion",
   },
   {
+    slug: "elbrit-life-sciences-to-expand-its-domestic-footprint-with-a-usd-3-million-investment-from-its-parent-firm-capital-investments",
     date: "Apr 24, 2019",
     title: "Elbrit expands its domestic footprint with a USD 3 million investment",
     body: "A fast-growing domestic pharmaceutical company expanding its footprint across the Indian pharmaceutical industry.",
     tag: "Investment",
   },
   {
+    slug: "elbrit-life-sciences-dreams-big-on-indian-pharmaceutical-business",
     date: "Apr 24, 2019",
     title: "Elbrit Life Sciences dreams big on the Indian pharmaceutical business",
     body: "Elbrit announced the commencement of operations — based in Mumbai and serving patients across South India.",
@@ -251,9 +255,9 @@ export const SOCIAL = [
 ];
 
 export const LEGAL = [
-  { label: "Terms of Use", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "About Cookies", href: "#" },
-  { label: "Social Media Terms", href: "#" },
-  { label: "Pharmacovigilance", href: "/contact" },
+  { label: "Terms of Use", href: "/terms-of-use" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "About Cookies", href: "/about-cookies" },
+  { label: "Social Media Terms", href: "/social-media-terms-of-use" },
+  { label: "Pharmacovigilance", href: "/pharmacovigilance" },
 ];
