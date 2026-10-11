@@ -3,7 +3,16 @@
     {
       "backendId": "elbrit-website",
       "rootDir": "/",
-      "ignore": ["node_modules", ".git", ".next", ".claude", ".env*", "firebase-debug.log", "firebase-debug.*.log"]
+      "ignore": [
+        "node_modules",
+        ".git",
+        ".next",
+        ".claude",
+        ".env*",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "alwaysDeployFromSource": true
     }
   ]
 }
