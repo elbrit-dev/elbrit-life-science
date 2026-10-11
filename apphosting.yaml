@@ -2,7 +2,7 @@
 # pharmacovigilance forms post to Next.js route handlers (/api/*) that run on the server.
 #
 # One-time secret setup (the website-api@elbrit.org "key:secret" from ERPNext):
-#   firebase apphosting:secrets:set erp-website-token
+#   firebase apphosting:secrets:set elbrit-website-erp-forms-token
 runConfig:
   minInstances: 0
 
@@ -22,6 +22,6 @@ env:
   - variable: ERP_AE_DOCTYPE
     value: formspro_9avfly000001
     availability: [RUNTIME]
-  - variable: ERP_WEBSITE_TOKEN
-    secret: erp-website-token
+  - variable: ERP_WEBSITE_FORMS_TOKEN
+    secret: elbrit-website-erp-forms-token
     availability: [RUNTIME]

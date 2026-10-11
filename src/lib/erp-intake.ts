@@ -15,7 +15,7 @@ const ENV: Record<Intake, { form: string; doctype: string }> = {
 /* Returns true only when ERPNext confirms the record was inserted. */
 export async function saveSubmission(kind: Intake, fields: Record<string, string | number | boolean | null>) {
   const url = process.env.ERP_URL;
-  const token = process.env.ERP_WEBSITE_TOKEN;
+  const token = process.env.ERP_WEBSITE_FORMS_TOKEN;
   const form = process.env[ENV[kind].form];
   const doctype = process.env[ENV[kind].doctype];
   if (!url || !token || !form || !doctype) {
