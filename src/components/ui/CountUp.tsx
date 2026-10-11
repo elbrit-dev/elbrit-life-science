@@ -17,11 +17,7 @@ export default function CountUp({ value, suffix = "", raw = false, duration = 16
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
+    if (!inView || reduce) return;
     let frame = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -34,7 +30,9 @@ export default function CountUp({ value, suffix = "", raw = false, duration = 16
     return () => cancelAnimationFrame(frame);
   }, [inView, value, duration, reduce]);
 
-  const text = raw ? String(display) : display.toLocaleString("en-IN");
+  // Reduced motion: show the final number without animating.
+  const shown = reduce && inView ? value : display;
+  const text = raw ? String(shown) : shown.toLocaleString("en-IN");
 
   return (
     <span ref={ref}>

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import ActionLink from "@/components/ui/ActionLink";
+import elbritMark from "@/assets/elbrit-mark.png";
 import { ArrowUpRight } from "lucide-react";
 import { NAV, SOCIAL, LEGAL, COMPANY } from "@/lib/content";
 
@@ -17,16 +18,16 @@ export default function Footer() {
               Discovery. Innovation. <span className="italic text-white/85">Excellence.</span>
             </p>
           </div>
-          <Link href="/contact" className="btn btn-accent shrink-0">
+          <ActionLink href="/contact" className="btn btn-accent shrink-0">
             Partner with us <ArrowUpRight className="h-4 w-4" />
-          </Link>
+          </ActionLink>
         </div>
       </div>
 
       {/* Columns */}
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Image src="/brand/elbrit-mark.png" alt="" width={44} height={44} className="h-11 w-11" />
+          <Image src={elbritMark} alt="" width={44} height={44} className="h-11 w-11" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
             An Indian pharmaceutical company — incorporated 2000, founded 2014 — creating long-term
             value for patients across India and the world.
@@ -51,9 +52,9 @@ export default function Footer() {
           <ul className="mt-5 space-y-3">
             {NAV.map((n) => (
               <li key={n.label}>
-                <Link href={n.href} className="text-sm text-white/75 transition-colors hover:text-white">
+                <ActionLink href={n.href} className="text-sm text-white/75 transition-colors hover:text-white">
                   {n.label}
-                </Link>
+                </ActionLink>
               </li>
             ))}
           </ul>
@@ -83,7 +84,7 @@ export default function Footer() {
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {LEGAL.map((l) => (
               <li key={l.label}>
-                <Link href={l.href} className="transition-colors hover:text-white">{l.label}</Link>
+                <ActionLink href={l.href} className="transition-colors hover:text-white">{l.label}</ActionLink>
               </li>
             ))}
           </ul>

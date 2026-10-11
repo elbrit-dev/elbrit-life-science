@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MapPin, Phone, Send, CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import Honeypot from "@/components/ui/Honeypot";
+import ActionLink from "@/components/ui/ActionLink";
 import { COMPANY, OFFICES } from "@/lib/content";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -62,7 +63,10 @@ export default function Contact() {
 
         {/* Form */}
         <Reveal delay={0.1}>
-          <div className="rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]">
+          <div
+            id="contact-form"
+            className="scroll-mt-28 rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]"
+          >
             {status === "sent" ? (
               <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                 <CheckCircle2 className="h-14 w-14 text-green-500" />
@@ -111,7 +115,7 @@ export default function Contact() {
                 </button>
                 <p className="text-xs text-slate-soft sm:col-span-2">
                   For adverse-event reporting, please use our{" "}
-                  <a href="/pharmacovigilance" className="link">Pharmacovigilance form</a>.
+                  <ActionLink href="/pharmacovigilance" className="link">Pharmacovigilance form</ActionLink>.
                 </p>
               </form>
             )}

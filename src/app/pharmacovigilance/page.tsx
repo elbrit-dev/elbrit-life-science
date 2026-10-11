@@ -45,7 +45,10 @@ export default function PharmacovigilancePage() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]">
+            <div
+              id="report-form"
+              className="scroll-mt-28 rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]"
+            >
               <h2 className="font-display text-2xl text-ink">Report an adverse event</h2>
               <p className="mt-2 mb-6 text-sm text-slate-soft">Fields marked * are required.</p>
               <AdverseEventForm />

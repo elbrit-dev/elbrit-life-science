@@ -7,7 +7,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  const mark = await readFile(join(process.cwd(), "public/brand/elbrit-mark.png"), "base64");
+  // Read from src/assets, NOT public/: a traced public/ file makes the build output contain a
+  // partial public/ dir, and Firebase App Hosting then skips copying the real one (all of
+  // /brand, /media-kit etc. 404 in production).
+  const mark = await readFile(join(process.cwd(), "src/assets/elbrit-mark.png"), "base64");
 
   return new ImageResponse(
     (

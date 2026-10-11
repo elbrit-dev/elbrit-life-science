@@ -1,4 +1,5 @@
 import Image from "next/image";
+import elbritMark from "@/assets/elbrit-mark.png";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
@@ -21,7 +22,7 @@ export default function Logo({
 
   return (
     <span className={cn("inline-flex items-center gap-2.5 select-none", className)}>
-      <Image src="/brand/elbrit-mark.png" alt="" aria-hidden width={36} height={36} className="h-9 w-9" />
+      <Image src={elbritMark} alt="" aria-hidden width={36} height={36} className="h-9 w-9" />
       <span className="flex flex-col leading-none">
         <span
           className={cn(

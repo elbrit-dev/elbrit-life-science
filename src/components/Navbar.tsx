@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import ActionLink from "@/components/ui/ActionLink";
 import { NAV } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -22,9 +23,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
+  // Close the mobile menu whenever the route changes (state reset during render, not in an effect).
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (pathname !== menuPath) {
+    setMenuPath(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -94,9 +98,9 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden xl:block">
-          <Link href="/contact" className="btn btn-primary text-sm">
+          <ActionLink href="/contact" className="btn btn-primary text-sm">
             Partner with us
-          </Link>
+          </ActionLink>
         </div>
 
         <button
@@ -163,9 +167,9 @@ export default function Navbar() {
                 </li>
               ))}
               <li className="mt-2">
-                <Link href="/contact" className="btn btn-primary w-full">
+                <ActionLink href="/contact" onClick={() => setOpen(false)} className="btn btn-primary w-full">
                   Partner with us
-                </Link>
+                </ActionLink>
               </li>
             </ul>
           </motion.div>

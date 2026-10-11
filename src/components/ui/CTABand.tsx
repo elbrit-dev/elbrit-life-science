@@ -1,4 +1,4 @@
-import Link from "next/link";
+import ActionLink from "./ActionLink";
 import { ArrowRight } from "lucide-react";
 import Reveal from "./Reveal";
 
@@ -28,17 +28,17 @@ export default function CTABand({
               {body && <p className="mt-5 max-w-xl text-lg text-white/70">{body}</p>}
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Link href={primary.href} className="btn btn-accent">
+              <ActionLink href={primary.href} className="btn btn-accent">
                 {primary.label}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </ActionLink>
               {secondary && (
-                <Link
+                <ActionLink
                   href={secondary.href}
                   className="btn border border-white/30 bg-transparent text-white hover:border-white"
                 >
                   {secondary.label}
-                </Link>
+                </ActionLink>
               )}
             </div>
           </div>

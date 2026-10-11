@@ -3,7 +3,7 @@ import PageHero from "@/components/ui/PageHero";
 import CTABand from "@/components/ui/CTABand";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { FeatureGrid, CheckList } from "@/components/ui/Blocks";
+import { FeatureGrid } from "@/components/ui/Blocks";
 
 export const metadata: Metadata = {
   title: "Research & Development",
@@ -50,7 +50,7 @@ export default function ResearchPage() {
             />
             <Reveal delay={0.1}>
               <div className="rounded-[1.5rem] border border-navy-100 bg-white p-8 shadow-[var(--shadow-card)]">
-                <h3 className="text-lg font-semibold text-navy-900">A patient's checklist</h3>
+                <h3 className="text-lg font-semibold text-navy-900">A patient&apos;s checklist</h3>
                 <ul className="mt-5 space-y-3">
                   {PATIENT_GUIDE.map((g) => (
                     <li key={g} className="flex items-start gap-3 text-sm leading-relaxed text-slate-soft">

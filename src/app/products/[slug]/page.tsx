@@ -6,6 +6,7 @@ import PageHero from "@/components/ui/PageHero";
 import CTABand from "@/components/ui/CTABand";
 import Reveal from "@/components/ui/Reveal";
 import Icon from "@/components/ui/Icon";
+import ActionLink from "@/components/ui/ActionLink";
 import { buildCatalogue, familySlug, getFamily, CATEGORIES, ERP_BY_CODE } from "@/lib/products";
 
 export const dynamicParams = false;
@@ -99,7 +100,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <p className="mt-6 border-t border-hairline pt-5 text-xs leading-relaxed text-muted">
                 For general information only — not medical advice. Always consult a registered medical
                 practitioner. To report a side effect, visit{" "}
-                <Link href="/pharmacovigilance" className="link">Pharmacovigilance</Link>.
+                <ActionLink href="/pharmacovigilance" className="link">Pharmacovigilance</ActionLink>.
               </p>
             </div>
           </Reveal>
