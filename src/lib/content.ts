@@ -5,7 +5,7 @@ export const COMPANY = {
   legal: "Elbrit Life Sciences Pvt. Ltd.",
   tagline: "Discovery. Innovation. Excellence.",
   tollFree: "1800 257 3579",
-  jobsUrl: "https://jobs.elbrit.org",
+  jobsUrl: "https://jobs.elbrit.org/jobs/Careers",
 };
 
 export type NavItem = {
@@ -197,17 +197,6 @@ export const PERKS = [
   "Medical benefits for staff & families",
   "Free-medicine policy",
   "Skill-enhancement training programmes",
-];
-
-export const OPENINGS = [
-  { role: "Regional Sales Manager — Cardio & Diabetes", location: "Jaipur, Rajasthan" },
-  { role: "Regional Sales Manager — Gynae & Ortho", location: "Madurai" },
-  { role: "Senior Graphic Designer", location: "Chennai" },
-  { role: "Product Manager / Sr. Product Executive", location: "Chennai" },
-  { role: "Regional Sales Manager — Cardio & Diabetes", location: "Cochin" },
-  { role: "Regional Sales Manager — Gynae & Ortho", location: "Bangalore" },
-  { role: "Business Executive — Cardio & Diabetic", location: "Bangalore" },
-  { role: "Area / Business Development Manager — Super Specialty", location: "Thrissur & Ernakulam" },
 ];
 
 export const OFFICES = [
