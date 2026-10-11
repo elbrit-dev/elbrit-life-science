@@ -1,10 +1,14 @@
 import { ImageResponse } from "next/og";
+import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 
 export const alt = "Elbrit Life Sciences — Discovery. Innovation. Excellence.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const mark = await readFile(join(process.cwd(), "public/brand/elbrit-mark.png"), "base64");
+
   return new ImageResponse(
     (
       <div
@@ -23,21 +27,8 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 72,
-              height: 72,
-              borderRadius: 18,
-              backgroundColor: "#E11B22",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 48,
-              fontWeight: 700,
-            }}
-          >
-            e
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders plain <img> */}
+          <img src={`data:image/png;base64,${mark}`} width={88} height={88} alt="" />
           <div style={{ fontSize: 40, fontWeight: 800, letterSpacing: -1 }}>
             ELBRiT Life Sciences
           </div>

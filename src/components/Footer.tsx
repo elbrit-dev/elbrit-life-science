@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { NAV, SOCIAL, LEGAL, COMPANY } from "@/lib/content";
@@ -25,9 +26,7 @@ export default function Footer() {
       {/* Columns */}
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <span className="grid h-11 w-11 place-items-center rounded-[6px] bg-elbrit-500 font-display text-2xl font-bold leading-none text-white">
-            e
-          </span>
+          <Image src="/brand/elbrit-mark.png" alt="" width={44} height={44} className="h-11 w-11" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/65">
             An Indian pharmaceutical company — incorporated 2000, founded 2014 — creating long-term
             value for patients across India and the world.

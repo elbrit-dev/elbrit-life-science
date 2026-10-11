@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
@@ -8,7 +9,7 @@ type LogoProps = {
 
 /**
  * Faithful recreation of the Elbrit Life Sciences logo:
- * red rounded "e" mark + "ELBRiT" wordmark (red dot on the i) + company subtitle.
+ * the official red "e" mark + "ELBRiT" wordmark (red dot on the i) + company subtitle.
  */
 export default function Logo({
   variant = "dark",
@@ -20,14 +21,7 @@ export default function Logo({
 
   return (
     <span className={cn("inline-flex items-center gap-2.5 select-none", className)}>
-      <span
-        aria-hidden
-        className="grid h-9 w-9 place-items-center rounded-[0.55rem] bg-elbrit-500 shadow-[0_6px_14px_rgba(225,27,34,0.35)]"
-      >
-        <span className="font-display text-2xl font-bold leading-none text-white -mt-0.5">
-          e
-        </span>
-      </span>
+      <Image src="/brand/elbrit-mark.png" alt="" aria-hidden width={36} height={36} className="h-9 w-9" />
       <span className="flex flex-col leading-none">
         <span
           className={cn(
